@@ -9,7 +9,7 @@ const app = express();
 
 // Enable CORS with specific options
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://readme-generator-ecru.vercel.app/',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
