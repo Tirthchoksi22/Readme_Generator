@@ -6,13 +6,27 @@ import { generateReadme } from "./generateReadme.js";
 
 dotenv.config();
 const app = express();
+const allowedOrigins = [
+  "http://localhost:3000", // Local Dev
+  "https://readme-generator-tirth-choksis-projects.vercel.app",
+  "https://readme-generator-ecru.vercel.app/",//  // Vercel Production
+];
 
 // Enable CORS with specific options
 app.use(cors({
-  origin: 'https://readme-generator-ecru.vercel.app/',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.error("Blocked by CORS:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
+
+// Optional: Handle preflight requests
+app.options("*", cors());
 
 // Increase JSON payload limit and add raw body logging
 app.use(express.json({ 
