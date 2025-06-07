@@ -69,8 +69,8 @@ function ASCIIHeader() {
   `
 
   return (
-    <div className="relative">
-      <pre className="text-xs sm:text-sm md:text-base lg:text-lg text-cyan-400   whitespace-pre">
+    <div className="relative w-full overflow-hidden">
+      <pre className="text-[8px] xs:text-[10px] sm:text-xs md:text-sm lg:text-base text-cyan-400 whitespace-pre font-mono leading-tight">
         {asciiArt}
       </pre>
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-xl -z-10" />
