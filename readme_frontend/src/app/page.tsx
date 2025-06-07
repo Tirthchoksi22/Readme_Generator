@@ -437,10 +437,10 @@ export default function AIReadmeGenerator() {
         throw new Error('No README content received from server');
       }
       setGeneratedReadme(data.readme);
-    } catch (error: unknown) {
-      console.error('Error generating README:', error);
+    } catch (generateError) {
+      console.error('Error generating README:', generateError);
       // Show error to user
-      setGeneratedReadme(`Error: ${error instanceof Error ? error.message : 'Failed to generate README'}`);
+      setGeneratedReadme(`Error: ${generateError instanceof Error ? generateError.message : 'Failed to generate README'}`);
     } finally {
       setIsGenerating(false);
     }
