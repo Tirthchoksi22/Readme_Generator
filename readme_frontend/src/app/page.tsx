@@ -325,7 +325,7 @@ export default function AIReadmeGenerator() {
         owner: match[1],
         repo: match[2].replace(/\.git$/, '')
       }
-    } catch (error) {
+    } catch (parseError) {
       throw new Error("Please enter a valid GitHub repository URL")
     }
   }
@@ -603,8 +603,8 @@ export default function AIReadmeGenerator() {
                           try {
                             await navigator.clipboard.writeText(generatedReadme);
                             // You could add a toast notification here
-                          } catch (error) {
-                            console.error('Failed to copy:', error);
+                          } catch (copyError) {
+                            console.error('Failed to copy:', copyError);
                           }
                         }}
                         className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black hover:cursor-pointer"
