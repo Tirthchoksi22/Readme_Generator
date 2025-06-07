@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Upload, Github, Zap, Code, FileText, Sparkles, Terminal, Cpu, X } from "lucide-react"
+import ParticleBackground from "@/components/ui/ParticleBackground"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
@@ -447,7 +448,8 @@ export default function AIReadmeGenerator() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      <ParticleBackground />
       {/* 3D Background */}
       <div className="fixed inset-0 -z-10">
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
