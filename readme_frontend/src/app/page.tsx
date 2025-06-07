@@ -180,7 +180,7 @@ function FileDropZone({ onFilesSelected }: { onFilesSelected: (files: File[]) =>
         onFilesSelected(validFiles)
       }
     },
-    [onFilesSelected],
+    [onFilesSelected, processDirectory],
   )
 
   const handleFileInput = useCallback(
@@ -250,7 +250,7 @@ function FileDropZone({ onFilesSelected }: { onFilesSelected: (files: File[]) =>
               ref={fileInputRef}
               type="file"
               multiple
-              // @ts-ignore - webkitdirectory and directory are valid HTML attributes
+              // @ts-expect-error - webkitdirectory and directory are valid HTML attributes
               webkitdirectory="true"
               directory="true"
               accept=".js,.jsx,.ts,.tsx,.py,.json,.md,.txt,.yml,.yaml,.toml,.cfg,.ini"
@@ -394,8 +394,8 @@ export default function AIReadmeGenerator() {
             const content = await file.text();
             fileContents[file.name] = content;
             console.log(`Successfully read file: ${file.name}`);
-          } catch (error) {
-            console.error(`Error reading file ${file.name}:`, error);
+          } catch (readError) {
+            console.error(`Error reading file ${file.name}:`, readError);
             throw new Error(`Failed to read file ${file.name}`);
           }
         }
@@ -437,10 +437,10 @@ export default function AIReadmeGenerator() {
         throw new Error('No README content received from server');
       }
       setGeneratedReadme(data.readme);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error generating README:', error);
       // Show error to user
-      setGeneratedReadme(`Error: ${error.message || 'Failed to generate README'}`);
+      setGeneratedReadme(`Error: ${error instanceof Error ? error.message : 'Failed to generate README'}`);
     } finally {
       setIsGenerating(false);
     }
