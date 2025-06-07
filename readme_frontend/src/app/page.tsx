@@ -106,7 +106,7 @@ function FileDropZone({ onFilesSelected }: { onFilesSelected: (files: File[]) =>
     })
   }
 
-  const processDirectory = async (entry: FileSystemDirectoryEntry, path: string = ''): Promise<File[]> => {
+  const processDirectory = useCallback(async (entry: FileSystemDirectoryEntry, path: string = ''): Promise<File[]> => {
     const files: File[] = []
     const reader = entry.createReader()
 
@@ -133,7 +133,7 @@ function FileDropZone({ onFilesSelected }: { onFilesSelected: (files: File[]) =>
 
     await readEntries()
     return files
-  }
+  }, [])
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -369,8 +369,8 @@ export default function AIReadmeGenerator() {
 
       setSelectedFiles([mockFile])
       setGithubError("")
-    } catch (error) {
-      setGithubError(error instanceof Error ? error.message : "Failed to fetch repository data")
+    } catch (fetchError) {
+      setGithubError(fetchError instanceof Error ? fetchError.message : "Failed to fetch repository data")
       setSelectedFiles([])
     } finally {
       setIsFetching(false)

@@ -1,4 +1,4 @@
-import { Object3D, Mesh, Material, BufferGeometry } from 'three'
+import { Material, BufferGeometry } from 'three'
 
 declare global {
   namespace JSX {
@@ -11,8 +11,6 @@ declare global {
         material?: Material;
         children?: React.ReactNode;
       };
-      ambientLight: any
-      pointLight: any
       octahedronGeometry: {
         args?: [number];
       };
@@ -32,6 +30,14 @@ declare global {
         color?: string;
         emissive?: string;
         emissiveIntensity?: number;
+      };
+      ambientLight: {
+        intensity?: number;
+      };
+      pointLight: {
+        position?: [number, number, number];
+        intensity?: number;
+        color?: string;
       };
     }
   }
