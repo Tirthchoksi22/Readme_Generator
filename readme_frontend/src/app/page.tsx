@@ -325,7 +325,7 @@ export default function AIReadmeGenerator() {
         owner: match[1],
         repo: match[2].replace(/\.git$/, '')
       }
-    } catch (parseError) {
+    } catch {
       throw new Error("Please enter a valid GitHub repository URL")
     }
   }
